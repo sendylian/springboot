@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sendy.springboot.dao.UserDesignWareMapper">
+  <resultMap id="BaseResultMap" type="com.sendy.springboot.UserDesignWare">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="WARE_INFO_ID" jdbcType="INTEGER" property="wareInfoId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="WARE_URL" jdbcType="VARCHAR" property="wareUrl" />
+    <result column="STATE" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, WARE_INFO_ID, USER_ID, ADD_TIME, WARE_URL, STATE
+  </sql>
+  <select id="getAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER_DESIGN_WARE
+  </select>
+
+  <select id="getUserDesignWareById"  parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_USER_DESIGN_WARE where ID=#{id}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_design_ware
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sendy.springboot.UserDesignWare">
+    insert into t_user_design_ware (ID, WARE_INFO_ID, USER_ID, 
+      ADD_TIME, WARE_URL, STATE
+      )
+    values (#{id,jdbcType=INTEGER}, #{wareInfoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{wareUrl,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sendy.springboot.UserDesignWare">
+    insert into t_user_design_ware
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="wareInfoId != null">
+        WARE_INFO_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+      <if test="wareUrl != null">
+        WARE_URL,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="wareInfoId != null">
+        #{wareInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wareUrl != null">
+        #{wareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sendy.springboot.UserDesignWare">
+    update t_user_design_ware
+    <set>
+      <if test="wareInfoId != null">
+        WARE_INFO_ID = #{wareInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wareUrl != null">
+        WARE_URL = #{wareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sendy.springboot.UserDesignWare">
+    update t_user_design_ware
+    set WARE_INFO_ID = #{wareInfoId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      WARE_URL = #{wareUrl,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

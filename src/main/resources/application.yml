@@ -1,0 +1,51 @@
+server:
+  port: 8899
+name: sendylian
+age: 27
+spring:
+    mvc:
+        view:
+           prefix: /WEB-INF/views/
+           suffix: .jsp
+
+
+    freemarker:
+        tempalte-loader-path: /templates
+        cache: false
+        charset: UTF-8
+        check-template-location: true
+        content: text/html
+        expose-request-attributes: true
+        expose-session-attributes: true
+        request-context-attribute: request
+        suffix: .ftl
+
+
+    datasource:
+        name: test
+        url: jdbc:mysql://192.168.1.19:13306/db_dnf?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        username: root
+        password: hetai_dnf
+        driver-class-name: com.mysql.jdbc.Driver
+
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.sendy.springboot  # 注意：对应实体类的路径
+
