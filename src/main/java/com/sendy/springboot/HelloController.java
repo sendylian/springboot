@@ -53,6 +53,7 @@ public class HelloController {
 
     }
 
+    //跳转到index.ftl页面
     @RequestMapping(value = "index")
     public String index(ModelMap map){
         map.addAttribute("resource","hehe");
